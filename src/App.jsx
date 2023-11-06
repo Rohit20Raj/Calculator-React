@@ -23,6 +23,9 @@ function reducer(state, {type,payload}){
       if(payload.digit==='0' && state.currentOperand==='0'){
         return state;
       }
+      if(payload.digit==='.' && state.currentOperand===''){
+        return null;
+      }
       if(payload.digit==='.' && state.currentOperand.includes('.')){
         return state;
       }
@@ -102,7 +105,7 @@ function evaluate({currentOperand, previousOperand, operation}){
     case "*":
       computation = prev*curr
       break
-    case "/":
+    case "÷":
       computation = prev/curr
       break
   }
@@ -130,7 +133,7 @@ function App() {
         </div>
         <button className='span-two' onClick={()=>dispatch({type:ACTIONS.CLEAR})}>AC</button>
         <button onClick={()=>dispatch({type:ACTIONS.DELETE_DIGIT})}>DEL</button>
-        <OperationButton operation="/" dispatch={dispatch}/>
+        <OperationButton operation="÷" dispatch={dispatch}/>
         <DigitButton digit="1" dispatch={dispatch}/>
         <DigitButton digit="2" dispatch={dispatch}/>
         <DigitButton digit="3" dispatch={dispatch}/>
